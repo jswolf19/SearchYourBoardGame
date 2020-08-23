@@ -1,0 +1,2 @@
+# SearchYourBoardGame
+最適なボードゲームを提案するサイト

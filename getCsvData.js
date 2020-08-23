@@ -8,7 +8,7 @@ function getCsvData(dataUrl) {
             //outputElement.innerHTML = request.responseText
             document.getElementById("display").innerHTML = request.responseText;
         }
-    }
+    };
     request.open('GET', dataUrl, true);
     request.send(null);    
 /*

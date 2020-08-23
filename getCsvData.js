@@ -7,8 +7,8 @@ function getCsvData(dataUrl) {
         if(request.readyState == 4 && request.status == 200){
             //outputElement.innerHTML = request.responseText
             document.getElementById("display").innerHTML = request.responseText;
-        }
-    };
+        };
+    }
     request.open('GET', dataUrl, true);
     request.send(null);    
 /*

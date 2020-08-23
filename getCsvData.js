@@ -5,9 +5,12 @@ function getCsvData(dataUrl) {
 
     request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
-            outputElement.innerHTML = request.responseText
+            //outputElement.innerHTML = request.responseText
+            document.getElementById("display").innerHTML = request.responseText;
         }
     }
+    request.open('GET', dataUrl, true);
+    request.send(null);    
 /*
     request.addEventListener('load', (event) => {
         const response = event.target.responseText;

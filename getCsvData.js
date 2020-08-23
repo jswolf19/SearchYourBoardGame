@@ -22,4 +22,5 @@ function getCsvData(dataUrl) {
 
 }
 
-getCsvData('https://docs.google.com/spreadsheets/d/e/2PACX-1vT1PU7m8bNHsSdLkTssjuG8l8s0wUGSGsEXHqP5kuylHZM7O2eKSJcd8Lu1q2T9JzEzTBHuvjeUgAlt/pub?gid=747156868&single=true&output=csv')
+getCsvData('https://docs.google.com/spreadsheets/d/e/2PACX-1vT1PU7m8bNHsSdLkTssjuG8l8s0wUGSGsEXHqP5kuylHZM7O2eKSJcd8Lu1q2T9JzEzTBHuvjeUgAlt/pub?output=csv')
+//getCsvData('https://docs.google.com/spreadsheets/d/e/2PACX-1vT1PU7m8bNHsSdLkTssjuG8l8s0wUGSGsEXHqP5kuylHZM7O2eKSJcd8Lu1q2T9JzEzTBHuvjeUgAlt/pub?gid=747156868&single=true&output=csv')

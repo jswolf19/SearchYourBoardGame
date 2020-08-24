@@ -1,20 +1,28 @@
-<!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="utf-8">
-    <title>title_test</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
- <!-- 
-    <link rel="stylesheet" href="sample.css">
+    <meta charset="UTF-8">
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 -->
-    <script src="getCsvData.js"></script>
+    <title>test document</title>
 </head>
-
 <body>
-    <div id="display"></div>
-    <div id="output_csv"></div>
-</body>
+<script src="https://unpkg.com/stein-js-client"></script>
+<script>
+  const store = new SteinStore(
+    "https://api.steinhq.com/v1/storages/5f43a0655d3cdc44fcd7d382"
+  );
 
+  store.read("test", { limit: 100, offset: 0 }).then(data => {
+      console.dir(data);
+      console.log(" - - - - - - - - - - - ");
+      for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+            console.log("title:"+element.text);
+      }
+  });
+
+</script>
+</body>
 </html>

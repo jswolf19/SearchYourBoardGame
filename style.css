@@ -1,0 +1,36 @@
+.cp_h1title {
+	position: relative;
+	padding: .3em;
+	text-align: center;
+	color:#EF6C00;
+}
+.cp_h1title::before,
+.cp_h1title::after {
+	position: absolute;
+	left: 0;
+	content: '';
+	width: 100%;
+	height: 6px;
+	box-sizing: border-box;
+}
+.cp_h1title::before {
+	top: 0;
+	border-top: 2px solid #F57C00;
+	border-bottom: 1px solid #F57C00;
+}
+.cp_h1title::after {
+	bottom: 0;
+	border-top: 1px solid #F57C00;
+	border-bottom: 2px solid #F57C00;
+}
+.box1 {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: #FFF;
+    border: solid 3px #F57C00;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+.box1 p {
+    margin: 0; 
+    padding: 0;
+}

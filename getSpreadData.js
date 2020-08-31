@@ -8,12 +8,13 @@ function eventsRegister(){
 
 //Googleスプレッドシートからデータを取得する
 function getSpreadData(){
+    const READ_SHEET_NAME = "test";
     const MAX_ROW = 10000;
     const START_ROW = 0;
     const store = new SteinStore("https://api.steinhq.com/v1/storages/5f43a0655d3cdc44fcd7d382");
-    store.read("test", {limit: MAX_ROW, offset: START_ROW}).then(data => {
+    store.read(READ_SHEET_NAME, {limit: MAX_ROW, offset: START_ROW}).then(data => {
         //デバッグ用データ内容表示
-        console.log(" - - - - - - - - - - - ");
+        console.log(" - - - - - - - - - - - AllData");
         console.dir(data);
         //文字列を対象のデータ型に直す
         for(i = 0; i < data.length; i++){
@@ -23,10 +24,25 @@ function getSpreadData(){
         }
         //ローカルにデータをJSON形式で保存する
         localStorage.setItem('json', JSON.stringify(data));
-        makeTable(data, "table")
+        makeTable(data)
     });
 }
 
+function makeTable(tableData){
+    var table = new Tabulator("#result-table", {
+        data:tableData,
+        layout:"fitColumns",
+        columns:[
+            {title:"名前", field:"name"},
+            {title:"人数", field:"player"},
+            {title:"時間", field:"time", hozAlign:"right"},
+            {title:"タグ", field:"tags"},
+            {title:"備考", field:"remarks"}
+        ],
+    });
+}
+
+/*
 function makeTable(data, tableId){
     var rows=[];
     var table = document.createElement("table");
@@ -54,6 +70,7 @@ function makeTable(data, tableId){
     //指定したdiv要素に表を加える
     document.getElementById(tableId).appendChild(table);
 }
+*/
 
 //フィルターエリアの変更を検知し実行される
 function onFilterChange(){
@@ -80,10 +97,10 @@ function onFilterChange(){
     }, allList);
 
     //デバッグ用データ内容表示
-    console.log(" - - - - - - - - - - - ");
+    console.log(" - - - - - - - - - - - FilterData");
     console.dir(result); 
 
-    makeTable(result, "table")
+    makeTable(result)
 }
 
 //Playerフィルタ

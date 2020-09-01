@@ -24,13 +24,17 @@
 	border-bottom: 2px solid #F57C00;
 }
 .box1 {
+	width: 700px;
     padding: 0.5em 1em;
-    margin: 2em 0;
+	margin-right: auto;
+	margin-left: auto;
     background: #FFF;
     border: solid 3px #F57C00;/*線*/
     border-radius: 10px;/*角の丸み*/
 }
-.box1 p {
-    margin: 0; 
-    padding: 0;
+.box2 {
+	width: 700px;
+    padding: 0.5em 1em;
+	margin-right: auto;
+	margin-left: auto;
 }

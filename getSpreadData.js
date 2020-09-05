@@ -8,7 +8,7 @@ function eventsRegister(){
 
 //Googleスプレッドシートからデータを取得する
 function getSpreadData(){
-    const READ_SHEET_NAME = "test";
+    const READ_SHEET_NAME = "DataList";
     const MAX_ROW = 10000;
     const START_ROW = 0;
     const store = new SteinStore("https://api.steinhq.com/v1/storages/5f43a0655d3cdc44fcd7d382");

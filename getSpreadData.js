@@ -18,9 +18,10 @@ function getSpreadData(){
         console.dir(data);
         //文字列を対象のデータ型に直す
         for(i = 0; i < data.length; i++){
-            data[i].player = parseInt(data[i].player,10);
-            data[i].time = parseInt(data[i].time,10);
-            data[i].tags = String(data[i].tags).split(';');
+            data[i].Name_Base = data[i].Name_Base + "[" + data[i].Name_Version_Expansion + "]"
+            data[i].Players_Min = parseInt(data[i].Players_Min,10);
+            data[i].PlayingTime_Min = parseInt(data[i].PlayingTime_Min,10);
+            data[i].Tags = String(data[i].Tags).split(';');
         }
         //ローカルにデータをJSON形式で保存する
         localStorage.setItem('json', JSON.stringify(data));
@@ -34,15 +35,15 @@ function makeTable(tableData){
         layout:"fitColumns",
         resizableColumns:false,
         columns:[
-            {title:"Example", field:"name", formatter:"image", formatterParams:{
-                height:"50px",
-                width:"50px",
+            {title:"画像", field:"Image", formatter:"image", formatterParams:{
+                height:"100px",
+                width:"100px",
             }},
-            {title:"名前", field:"name"},
-            {title:"人数", field:"player"},
-            {title:"時間", field:"time", hozAlign:"right"},
-            {title:"タグ", field:"tags"},
-            {title:"備考", field:"remarks"}
+            {title:"名前", field:"Name_Base"},
+            {title:"人数", field:"Players_Min"},
+            {title:"時間", field:"PlayingTime_Min", hozAlign:"right"},
+            {title:"タグ", field:"Tags"},
+            {title:"備考", field:"Remarks"}
         ],
     });
 }
@@ -117,9 +118,9 @@ function filterByPlayer(list, value){
     return list.filter(function(item){
         switch(value){
             case '1':
-                return item.player == 1;
+                return item.Players_Min == 1;
             case '2':
-                return 1 < item.player;
+                return 1 < item.Players_Min;
         }
     });
 }
@@ -132,7 +133,7 @@ function filterByTag(list, value){
     return list.filter(function(item){
         var isMatch = false;
         Array.from(value).forEach(function(chkItem, i) {
-            item.tags.forEach(function(tagItem, i) {
+            item.Tags.forEach(function(tagItem, i) {
                 if (tagItem === $(chkItem).val()) {
                     isMatch = true;
                 }

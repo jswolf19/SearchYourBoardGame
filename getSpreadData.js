@@ -18,10 +18,13 @@ function getSpreadData(){
         console.dir(data);
         //文字列を対象のデータ型に直す
         for(i = 0; i < data.length; i++){
-            data[i].Name_Base = data[i].Name_Base + "[" + data[i].Name_Version_Expansion + "]"
+            data[i].Name_Base = data[i].Name_Base + "[" + data[i].Name_Version_Expansion + "]";
             data[i].Players_Min = parseInt(data[i].Players_Min,10);
             data[i].PlayingTime_Min = parseInt(data[i].PlayingTime_Min,10);
             data[i].Tags = String(data[i].Tags).split(';');
+            if(data[i].Image == null){
+                data[i].Image = "image/NoImage.png"
+            };
         }
         //ローカルにデータをJSON形式で保存する
         localStorage.setItem('json', JSON.stringify(data));
@@ -47,36 +50,6 @@ function makeTable(tableData){
         ],
     });
 }
-
-/*
-function makeTable(data, tableId){
-    var rows=[];
-    var table = document.createElement("table");
-
-    //ヘッダ行
-    var keys = Object.keys(data[0]);
-    rows.push(table.insertRow(-1)); //行追加
-    keys.forEach(element => {
-        cell = rows[0].insertCell(-1); //列追加
-        cell.appendChild(document.createTextNode(element)); //データ追加
-        cell.style.backgroundColor = "#bbb"; //背景色の設定
-    });
-
-    //データ行
-    for(rowNo = 0; rowNo < data.length; rowNo++){
-        rows.push(table.insertRow(-1)); //行追加
-        var row = data[rowNo]
-        keys.forEach(element => {
-            cell = rows[rowNo+1].insertCell(-1); //列追加
-            cell.appendChild(document.createTextNode(row[element])); //データ追加
-            cell.style.backgroundColor = "#ddd"; //背景色の設定
-        });
-    }
-
-    //指定したdiv要素に表を加える
-    document.getElementById(tableId).appendChild(table);
-}
-*/
 
 //フィルターエリアの変更を検知し実行される
 function onFilterChange(){

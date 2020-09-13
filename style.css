@@ -56,3 +56,15 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
+
+/* データ行のフォーマット指定 */
+#result-table .tabulator-row table{
+    vertical-align: middle; /*中央寄せ*/
+    border-collapse:collapse; /*行の間隔をあけずに表示*/
+}
+#result-table .tabulator-row table img{
+    border: 2px solid #CCC; /*画像周りのライン[2pxで1重の灰色]*/
+}
+#result-table .tabulator-row table tr td{
+	border:none; /*データ毎の周りのラインは無し*/
+}

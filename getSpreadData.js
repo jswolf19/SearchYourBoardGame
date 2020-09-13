@@ -32,7 +32,12 @@ function makeTable(tableData){
     var table = new Tabulator("#result-table", {
         data:tableData,
         layout:"fitColumns",
+        resizableColumns:false,
         columns:[
+            {title:"Example", field:"name", formatter:"image", formatterParams:{
+                height:"50px",
+                width:"50px",
+            }},
             {title:"名前", field:"name"},
             {title:"人数", field:"player"},
             {title:"時間", field:"time", hozAlign:"right"},

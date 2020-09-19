@@ -14,9 +14,23 @@
     <!-- HTML表の定義を作成するライブラリの読み込み -->
     <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@4.7/dist/css/tabulator.min.css">
     <script src="https://unpkg.com/tabulator-tables@4.7/dist/js/tabulator.min.js"></script>
+    <!-- テンプレート代入 -->
+    <script src="https://unpkg.com/mustache@3.2.1/mustache.js"></script>
     <!-- 自作の機能 -->
     <link rel="stylesheet" href="style.css">
     <script src="getSpreadData.js"></script>
+
+    <template id="narrowRowLayout">
+        <div class="narrow-row">
+            <div class="image"><img src="{{Image}}" /></div>
+            <div><dl>
+                {{#content}}
+                <dt>{{title}}</dt>
+                <dd>{{value}}</dd>
+                {{/content}}
+            </dl></div>
+        </div>
+    </template>
 </head>
 
 <body>

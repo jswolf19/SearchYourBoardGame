@@ -60,6 +60,26 @@ function makeTable(tableData){
             {title:"タグ", field:"Tags"},
             {title:"備考", field:"Remarks"}
         ],
+        rowFormatter:function(row) {
+            if(window.innerWidth <= 650) {
+                var data = row.getData();
+                var narrowRow = document.getElementById("narrowRowLayout").content.firstElementChild;
+
+                var content = row.getTable().getColumnDefinitions()
+                    .filter(function(c) {
+                        return c.field !== "Image";
+                    }).map(function(c) {
+                        return {title: c.title, value: data[c.field]};
+                    });
+
+                row.getElement().innerHTML = Mustache.render(narrowRow.outerHTML,
+                    {
+                        Image: data.Image,
+                        content: content
+                    }
+                );
+            }
+        }
     });
 }
 
@@ -133,5 +153,5 @@ function filterByTag(list, value){
 eventsRegister();
 //読み込み完了時に実行される
 window.onload = function(){
-    getSpreadData()
+     getSpreadData()
 };

@@ -1,7 +1,7 @@
 //イベント登録処理
 function eventsRegister(){
     $(function($){
-        $(".filter_player select").on("change", onFilterChange);
+        $(".filter_player input").on("change", onFilterChange);
         $(".filter_tag input").on("change", onFilterChange);
     });
 }
@@ -72,7 +72,7 @@ function onFilterChange(){
     //Playerフィルタの追加
     filterFncs.push(
         function(list){
-            return filterByPlayer(list, $('.filter_player select').val());
+            return filterByPlayer(list, $('.filter_player input').val());
         }
     );
     //Tagフィルタの追加
@@ -100,12 +100,13 @@ function filterByPlayer(list, value){
         return list;
     }
 
+    var players = parseInt(value, 10);
+
     return list.filter(function(item){
-        switch(value){
-            case '1':
-                return item.Players_Min == 1;
-            case '2':
-                return 1 < item.Players_Min;
+        if(item.Players_OnlyFlag) {
+            return item.Players_Min === players || item.Players_Max === players;
+        } else {
+            return item.Players_Min <= players && item.Players_Max >= players;
         }
     });
 }

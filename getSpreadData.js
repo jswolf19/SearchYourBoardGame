@@ -1,7 +1,7 @@
 //イベント登録処理
 function eventsRegister(){
     $(function($){
-        $(".filter_player select").on("change", onFilterChange);
+        $(".filter_player input").on("change", onFilterChange);
         $(".filter_tag input").on("change", onFilterChange);
     });
 }
@@ -20,6 +20,9 @@ function getSpreadData(){
         for(i = 0; i < data.length; i++){
             data[i].Name_Base = data[i].Name_Base + "[" + data[i].Name_Version_Expansion + "]";
             data[i].Players_Min = parseInt(data[i].Players_Min,10);
+            data[i].Players_Max = parseInt(data[i].Players_Max,10);
+            data[i].Players_OnlyFlag = (data[i].Players_OnlyFlag === 'TRUE');
+            data[i].Players = formatPlayers(data[i]);
             data[i].PlayingTime_Min = parseInt(data[i].PlayingTime_Min,10);
             data[i].Tags = String(data[i].Tags).split(';');
             if(data[i].Image == null){
@@ -30,6 +33,15 @@ function getSpreadData(){
         localStorage.setItem('json', JSON.stringify(data));
         makeTable(data)
     });
+}
+
+function formatPlayers(data) {
+    var ret = "" + data.Players_Min;
+    if(data.Players_Min !== data.Players_Max) {
+        ret += (data.Players_OnlyFlag ? ", " : " - ") + data.Players_Max;
+    }
+
+    return ret;
 }
 
 function makeTable(tableData){
@@ -43,7 +55,7 @@ function makeTable(tableData){
                 width:"100px",
             }},
             {title:"名前", field:"Name_Base"},
-            {title:"人数", field:"Players_Min"},
+            {title:"人数", field:"Players"},
             {title:"時間", field:"PlayingTime_Min", hozAlign:"right"},
             {title:"タグ", field:"Tags"},
             {title:"備考", field:"Remarks"}
@@ -60,7 +72,7 @@ function onFilterChange(){
     //Playerフィルタの追加
     filterFncs.push(
         function(list){
-            return filterByPlayer(list, $('.filter_player select').val());
+            return filterByPlayer(list, $('.filter_player input').val());
         }
     );
     //Tagフィルタの追加
@@ -88,12 +100,13 @@ function filterByPlayer(list, value){
         return list;
     }
 
+    var players = parseInt(value, 10);
+
     return list.filter(function(item){
-        switch(value){
-            case '1':
-                return item.Players_Min == 1;
-            case '2':
-                return 1 < item.Players_Min;
+        if(item.Players_OnlyFlag) {
+            return item.Players_Min === players || item.Players_Max === players;
+        } else {
+            return item.Players_Min <= players && item.Players_Max >= players;
         }
     });
 }
